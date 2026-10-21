@@ -1,26 +1,9 @@
-# ============================================
-# Environment Variables & Secrets (CRITICAL)
-# ============================================
+# Environment & Secrets
 .env
 .env.*
 *.env
-*.env.local
 
-# ============================================
-# Docs, Practice & Learning Modules (Ignored)
-# ============================================
-docs/
-backend/docs/
-practice/
-backend/practice/
-"practise code"/
-"backend/practise code"/
-practise*/
-practice*/
-
-# ============================================
-# Python & Bytecode
-# ============================================
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -29,64 +12,27 @@ __pycache__/
 env/
 venv/
 .venv/
-ENV/
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
 *.egg-info/
-.installed.cfg
-*.egg
 .pytest_cache/
 
-# ============================================
-# Node & Frontend
-# ============================================
+# Frontend / Node
 node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/dist-ssr/
+dist/
+dist-ssr/
 *.local
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-# ============================================
-# Temporary files & RAG logs
-# ============================================
+# Runtime & Logs
 temp_*
-temp_*.pdf
 *.log
-rag_metrics.jsonl
-backend/rag_metrics.jsonl
-
-# ============================================
-# Large PDFs & Data binaries
-# ============================================
 *.pdf
-data/
-data/*.pdf
-backend/practice/*.pdf
+rag_metrics.jsonl
 
-# ============================================
-# OS & Editor
-# ============================================
+# System & IDE
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
