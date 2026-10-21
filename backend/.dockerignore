@@ -1,0 +1,14 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.*
+*.env
+practice/
+"practise code"/
+docs/
+.vscode/
+rag_metrics.jsonl
+temp_*
+*.log
