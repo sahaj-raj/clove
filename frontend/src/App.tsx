@@ -80,7 +80,6 @@ export default function App() {
     try {
       const res = await fetch(UPLOAD_URL, {
         method: "POST",
-        headers: { "X-API-Key": "rag-secret-token-123" },
         body: formData,
       });
       if (!res.ok) throw new Error(`Status ${res.status}`);
@@ -114,7 +113,7 @@ export default function App() {
     try {
       const res = await fetch(CHAT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "X-API-Key": "rag-secret-token-123" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, session_id: "clove_web_session" }),
       });
 

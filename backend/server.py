@@ -8,8 +8,7 @@ import psycopg
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from pgvector.psycopg import register_vector
-from fastapi import FastAPI, UploadFile, File, HTTPException, status, Depends, Security
-from fastapi.security import APIKeyHeader
+from fastapi import FastAPI, UploadFile, File, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, HTMLResponse
 from pydantic import BaseModel, Field
@@ -60,23 +59,9 @@ app.add_middleware(
     allow_methods=["*"]
 )
 
-API_KEY_NAME = "X-API-Key"
-api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
-VALID_API_KEY = os.environ.get("RAG_API_KEY", "rag-secret-token-123")
-
-def verify_api_key(api_key: str = Security(api_key_header)):
-    # Support development and direct client access gracefully
-    if not api_key or api_key == VALID_API_KEY:
-        return api_key or VALID_API_KEY
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="unauthorized access denied"
-    )
-
 @app.post("/api/documents/upload")
 async def upload_document(
-    file: UploadFile = File(...),
-    auth: str = Depends(verify_api_key)
+    file: UploadFile = File(...)
 ):
     """
     Accepts any PDF, chunks it, embeds it, and stores it permanently in Supabase.
@@ -109,8 +94,7 @@ class ChatRequest(BaseModel):
 @app.post("/api/chat")
 @app.post("/chat")
 async def chat_endpoint(
-    req: ChatRequest,
-    auth: str = Depends(verify_api_key)
+    req: ChatRequest
 ):
     """
     1. Embeds query -> 2. Vector search on Supabase -> 3. Cross-encoder rerank
