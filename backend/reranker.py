@@ -1,7 +1,7 @@
 import math
 from fastembed.rerank.cross_encoder import TextCrossEncoder as TextReranker
 
-reranker = TextReranker(model_name="Xenova/ms-marco-MiniLM-L-6-v2")
+reranker = TextReranker(model_name="Xenova/ms-marco-MiniLM-L-6-v2", threads=1)
 
 def sigmoid(x):                                                                                                                                                    
         return 1 / (1 + math.exp(-x))
