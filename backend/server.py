@@ -15,7 +15,7 @@ from pydantic import BaseModel, Field
 
 # Imports from local modules
 from ingestion_service import process_and_store_pdf, GoogleEmbedding
-from reranker import rerank_chunks
+# from reranker import rerank_chunks
 from prompt_builder import build_rag_prompt
 from generator import stream_gemini_responses
 from db_ingest import save_message, get_chat_history
@@ -127,7 +127,8 @@ async def chat_endpoint(
     ]
 
     # 3. Rerank down to top 5
-    top_chunks = rerank_chunks(req.query, candidate_chunks, top_k=5)
+    # top_chunks = rerank_chunks(req.query, candidate_chunks, top_k=5)
+    top_chunks = candidate_chunks[:5]
 
     # 4. Fetch past chat history
     chat_history = get_chat_history(conn, req.session_id, limit=6)
