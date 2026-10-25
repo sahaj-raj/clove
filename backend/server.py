@@ -115,20 +115,20 @@ async def chat_endpoint(
             SELECT id, doc_name, page_number, content, 1 - (embedding <=> %s) AS similarity
             FROM chunks
             ORDER BY embedding <=> %s ASC
-            LIMIT 20;
+            LIMIT 5;
             """,
             (query_vec, query_vec)
         )
         candidate_rows = cur.fetchall()
 
-    candidate_chunks = [
+    top_chunks = [
         {"chunk_id": r[0], "source": r[1] or "Document", "page": r[2], "text": r[3]}
         for r in candidate_rows
     ]
 
     # 3. Rerank down to top 5
     # top_chunks = rerank_chunks(req.query, candidate_chunks, top_k=5)
-    top_chunks = candidate_chunks[:5]
+    # top_chunks = candidate_chunks[:5]
 
     # 4. Fetch past chat history
     chat_history = get_chat_history(conn, req.session_id, limit=6)
